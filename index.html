@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intello Technologies – Coming Soon</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: #12172a;
+      --primary: #5eead4;
+      --secondary: #818cf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: rgba(255,255,255,0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #111827, var(--bg));
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Logo */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #020617;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .logo-text {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .logo-text span {
+      color: var(--primary);
+    }
+
+    /* Headline */
+    h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto 56px;
+      line-height: 1.7;
+    }
+
+    /* Services */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .service-card {
+      background: linear-gradient(180deg, var(--card), #0e1324);
+      border-radius: 18px;
+      padding: 32px 24px;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: left;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(94, 234, 212, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--primary);
+    }
+
+    .service-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Email Form */
+    .notify {
+      max-width: 520px;
+      margin: 0 auto 48px;
+    }
+
+    .notify h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .notify p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .notify-form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .notify-form input {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0b1022;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      min-width: 200px;
+    }
+
+    .notify-form input:focus {
+      border-color: var(--primary);
+    }
+
+    .notify-form button {
+      padding: 14px 22px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #020617;
+      transition: opacity 0.2s ease;
+    }
+
+    .notify-form button:hover {
+      opacity: 0.9;
+    }
+
+    .notify-form button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: rgba(94, 234, 212, 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-size: 14px;
+      margin-top: 16px;
+      animation: slideIn 0.3s ease;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Countdown Timer */
+    .countdown {
+      margin: 48px auto 56px;
+      max-width: 600px;
+    }
+
+    .countdown-title {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .time-unit {
+      background: linear-gradient(180deg, var(--card), #0e1324);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 20px;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .time-value {
+      font-size: 40px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .time-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Email List Counter */
+    .email-counter {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .email-counter strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .footer {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .time-unit {
+        min-width: 70px;
+        padding: 20px 12px;
+      }
+
+      .time-value {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .notify-form {
+        flex-direction: column;
+      }
+
+      .notify-form input,
+      .notify-form button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-mark">IT</div>
+      <div class="logo-text"><span>Intello</span> Technologies</div>
+    </div>
+
+    <!-- Headline -->
+    <h1>Building <span>Intelligent</span><br>Digital Solutions</h1>
+
+    <p class="subtitle">
+      A modern software development agency delivering scalable systems,
+      AI-powered innovation, secure infrastructure, and elite engineering teams.
+    </p>
+
+    <!-- Countdown Timer -->
+    <div class="countdown">
+      <div class="countdown-title">Launching In</div>
+      <div class="countdown-timer">
+        <div class="time-unit">
+          <span class="time-value" id="days">00</span>
+          <span class="time-label">Days</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-value" id="hours">00</span>
+          <span class="time-label">Hours</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-value" id="minutes">00</span>
+          <span class="time-label">Minutes</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-value" id="seconds">00</span>
+          <span class="time-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <div class="services">
+
+      <div class="service-card">
+        <div class="icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8"/>
+            <path d="M12 17v4"/>
+          </svg>
+        </div>
+        <div class="service-title">Software Development</div>
+        <div class="service-desc">
+          High-performance web, mobile, and enterprise applications tailored to your business.
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h-2a5 5 0 0 0-5-5h-1v1.27c.6.34 1 .99 1 1.73a2 2 0 1 1-2-2V9h-1a5 5 0 0 0-5 5H4a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2Z"/>
+            <path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+          </svg>
+        </div>
+        <div class="service-title">AI Consulting</div>
+        <div class="service-desc">
+          Intelligent automation, AI strategy, and data-driven systems that scale.
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="service-title">Outsourcing</div>
+        <div class="service-desc">
+          Dedicated engineers and agile teams embedded directly into your workflow.
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <div class="service-title">Cybersecurity</div>
+        <div class="service-desc">
+          Secure-by-design systems, threat protection, and risk assessments.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Email Capture -->
+    <div class="notify">
+      <h3>We're launching soon 🚀</h3>
+      <p>Leave your email and be the first to know when we go live.</p>
+
+      <form class="notify-form" id="emailForm">
+        <input 
+          type="email" 
+          id="emailInput"
+          placeholder="Enter your email address" 
+          required 
+        />
+        <button type="submit" id="submitBtn">Notify Me</button>
+      </form>
+
+      <div class="success-message" id="successMessage">
+        ✓ Thanks! We'll notify you when we launch.
+      </div>
+
+      <div class="email-counter" id="emailCounter"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      © 2026 Intello Technologies • All rights reserved
+    </div>
+
+  </div>
+
+  <script>
+    // Countdown Timer
+    function initCountdown() {
+      // Calculate next Friday (January 17, 2025 at midnight)
+      const now = new Date();
+      const currentDay = now.getDay(); // 0 = Sunday, 5 = Friday
+      
+      // Calculate days until next Friday
+      let daysUntilFriday = (5 - currentDay + 7) % 7;
+      if (daysUntilFriday === 0 && now.getHours() > 0) {
+        daysUntilFriday = 7; // If it's Friday but past midnight, go to next Friday
+      }
+      
+      const targetDate = new Date(now);
+      targetDate.setDate(now.getDate() + daysUntilFriday);
+      targetDate.setHours(23, 59, 59, 999); // Set to end of Friday
+      
+      function updateCountdown() {
+        const now = new Date();
+        const difference = targetDate - now;
+        
+        if (difference <= 0) {
+          // Countdown finished
+          document.getElementById('days').textContent = '00';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+          document.querySelector('.countdown-title').textContent = 'We\'re Live! 🎉';
+          return;
+        }
+        
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+      
+      // Update immediately and then every second
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    // Email storage and form handling
+    const emailForm = document.getElementById('emailForm');
+    const emailInput = document.getElementById('emailInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+    const emailCounter = document.getElementById('emailCounter');
+
+    // Load emails from memory
+    let emails = [];
+
+    // Update counter display
+    function updateCounter() {
+      if (emails.length > 0) {
+        emailCounter.innerHTML = `<strong>${emails.length}</strong> ${emails.length === 1 ? 'person has' : 'people have'} joined the waitlist`;
+      }
+    }
+
+    // Handle form submission
+    emailForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = emailInput.value.trim();
+      
+      // Basic email validation
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+      }
+
+      // Check for duplicates
+      if (emails.includes(email.toLowerCase())) {
+        successMessage.textContent = '✓ You\'re already on the list!';
+        successMessage.classList.add('show');
+        emailInput.value = '';
+        
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+        }, 3000);
+        return;
+      }
+
+      // Disable button during submission
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Adding...';
+
+      // Simulate API call
+      setTimeout(() => {
+        // Add email to list
+        emails.push(email.toLowerCase());
+        
+        // Show success message
+        successMessage.textContent = '✓ Thanks! We\'ll notify you when we launch.';
+        successMessage.classList.add('show');
+        
+        // Reset form
+        emailInput.value = '';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Notify Me';
+        
+        // Update counter
+        updateCounter();
+
+        // Hide success message after 4 seconds
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+        }, 4000);
+
+        // Log to console (in production, this would be sent to a backend)
+        console.log('New email added:', email);
+        console.log('Total emails:', emails.length);
+        console.log('All emails:', emails);
+      }, 800);
+    });
+
+    // Initialize everything
+    initCountdown();
+    updateCounter();
+  </script>
+</body>
+</html>
