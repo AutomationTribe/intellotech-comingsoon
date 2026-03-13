@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Consulting – Intello Technologies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#0a0a0f;--paper:#f5f4f0;--accent:#00e5a0;--accent2:#0057ff;--mid:#6b6b78;--border:rgba(10,10,15,0.1);--card-bg:#ffffff}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5%;background:rgba(245,244,240,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none}
+    .nav-logo span{color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{font-size:.875rem;font-weight:500;color:var(--mid);text-decoration:none;transition:color.2s}
+    .nav-links a:hover{color:var(--ink)}
+    .nav-cta{background:var(--ink);color:var(--paper)!important;padding:.5rem 1.2rem;border-radius:100px;font-weight:500!important;transition:background.2s!important}
+    .nav-cta:hover{background:var(--accent2)!important}
+
+    .page-hero{min-height:72vh;display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 5% 5rem;background:linear-gradient(155deg,#020d08 0%,#001a0f 60%,#051533 100%);position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,160,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,160,.04) 1px,transparent 1px);background-size:50px 50px}
+    .blob-hero{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,160,.2) 0%,transparent 70%);bottom:-200px;right:-100px;pointer-events:none}
+    .page-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.25);color:var(--accent);padding:.4rem 1rem;border-radius:100px;font-size:.8rem;font-weight:500;letter-spacing:.04em;margin-bottom:1.5rem;width:fit-content}
+    .page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.05;max-width:16ch}
+    .page-hero p{margin-top:1.5rem;color:rgba(255,255,255,.5);font-size:1.1rem;max-width:55ch;line-height:1.7;font-weight:300}
+    .hero-btns{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-accent{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--ink);padding:.85rem 1.8rem;border-radius:100px;font-size:.9rem;font-weight:600;text-decoration:none;transition:background.2s,transform.15s}
+    .btn-accent:hover{background:#00ffb3;transform:translateY(-2px)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);padding:.85rem 1.8rem;border-radius:100px;font-size:.9rem;font-weight:400;text-decoration:none;transition:.2s}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+    section{padding:6rem 5%}
+    .section-label{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+    .section-label::before{content:'';display:block;width:20px;height:2px;background:var(--accent2)}
+    h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+    .sub{margin-top:.75rem;color:var(--mid);font-size:1rem;line-height:1.7;font-weight:300;max-width:55ch}
+
+    .ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem;margin-top:3.5rem}
+    .ai-card{padding:2rem;background:var(--card-bg);border:1px solid var(--border);border-radius:16px;transition:transform.2s,box-shadow.2s}
+    .ai-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.07)}
+    .ac-icon{font-size:2rem;margin-bottom:1rem}
+    .ai-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+    .ai-card p{font-size:.85rem;color:var(--mid);line-height:1.6;font-weight:300}
+
+    .use-cases{background:#0a0a0f;color:#fff}
+    .use-cases .section-label{color:var(--accent)}
+    .use-cases .section-label::before{background:var(--accent)}
+    .use-cases h2{color:#fff}
+    .use-cases .sub{color:rgba(255,255,255,.45)}
+    .uc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:3rem}
+    .uc-item{padding:1.5rem;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.02);transition:border-color.2s}
+    .uc-item:hover{border-color:rgba(0,229,160,.4)}
+    .uc-item .ui-icon{font-size:1.6rem;margin-bottom:.75rem}
+    .uc-item h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.35rem}
+    .uc-item p{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.5;font-weight:300}
+
+    .cta-strip{background:linear-gradient(135deg,#00b37a,var(--accent));padding:5rem 5%;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+    .cta-strip h2{color:var(--ink);font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;max-width:30ch}
+    .btn-dark{display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:var(--paper);padding:.9rem 2rem;border-radius:100px;font-size:.95rem;font-weight:600;text-decoration:none;transition:transform.15s,box-shadow.2s;white-space:nowrap}
+    .btn-dark:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.25)}
+
+    footer{background:#050508;color:rgba(245,244,240,.4);padding:3rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(255,255,255,.04)}
+    .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:rgba(245,244,240,.7);text-decoration:none}
+    .footer-logo span{color:var(--accent)}
+    .footer-links{display:flex;gap:2rem;list-style:none}
+    .footer-links a{font-size:.82rem;color:rgba(245,244,240,.4);text-decoration:none;transition:color.2s}
+    .footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:.8rem}
+
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity.6s,transform.6s}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:900px){.nav-links{display:none}.cta-strip{flex-direction:column}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">IT<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="software.html">Software</a></li>
+    <li><a href="outsourcing.html">Outsourcing</a></li>
+    <li><a href="cybersecurity.html">Security</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="blob-hero"></div>
+  <div class="page-badge">🤖 AI Consulting</div>
+  <h1>Intelligence built into every layer.</h1>
+  <p>We help businesses move from AI curiosity to competitive advantage — with tailored strategy, real implementations, and measurable outcomes.</p>
+  <div class="hero-btns">
+    <a href="index.html#contact" class="btn-accent">Book an AI Consult →</a>
+    <a href="index.html#process" class="btn-ghost">Our Approach</a>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">Services</div>
+  <h2 class="fade-up">From AI strategy to production deployment.</h2>
+  <p class="sub fade-up">We don't just advise — we build. Our AI team works alongside your organisation from ideation to live, scalable systems.</p>
+
+  <div class="ai-grid">
+    <div class="ai-card fade-up">
+      <div class="ac-icon">🗺️</div>
+      <h3>AI Strategy & Roadmapping</h3>
+      <p>We audit your current workflows, identify the highest-ROI opportunities for AI integration, and build a phased implementation roadmap aligned with your business objectives.</p>
+    </div>
+    <div class="ai-card fade-up">
+      <div class="ac-icon">🧠</div>
+      <h3>Machine Learning Models</h3>
+      <p>Custom ML models trained on your data — for prediction, classification, recommendation, and anomaly detection. Built with reproducibility and governance in mind.</p>
+    </div>
+    <div class="ai-card fade-up">
+      <div class="ac-icon">💬</div>
+      <h3>Generative AI & LLM Integration</h3>
+      <p>RAG pipelines, fine-tuned LLMs, and custom GPT-powered products. We integrate large language models that are grounded, accurate, and production-ready.</p>
+    </div>
+    <div class="ai-card fade-up">
+      <div class="ac-icon">⚡</div>
+      <h3>Intelligent Automation</h3>
+      <p>Replace manual, repetitive processes with intelligent agents and workflows. From document processing to multi-step decision automation — we automate with precision.</p>
+    </div>
+    <div class="ai-card fade-up">
+      <div class="ac-icon">📊</div>
+      <h3>Data Engineering & Analytics</h3>
+      <p>Clean, connected, and queryable data infrastructure is the foundation of any AI initiative. We build the pipelines and warehouses that power your models.</p>
+    </div>
+    <div class="ai-card fade-up">
+      <div class="ac-icon">🔍</div>
+      <h3>AI Audit & Optimisation</h3>
+      <p>Already have AI in production? We audit model performance, bias risk, and infrastructure cost — and deliver a concrete optimisation plan.</p>
+    </div>
+  </div>
+</section>
+
+<section class="use-cases">
+  <div class="section-label">Use Cases</div>
+  <h2 class="fade-up">AI that solves real problems across industries.</h2>
+  <p class="sub fade-up">We've deployed AI solutions across finance, healthcare, logistics, retail, and more.</p>
+
+  <div class="uc-grid">
+    <div class="uc-item fade-up"><div class="ui-icon">🤖</div><h4>Intelligent Chatbots</h4><p>Customer-facing AI assistants that handle queries, qualify leads, and escalate intelligently.</p></div>
+    <div class="uc-item fade-up"><div class="ui-icon">📄</div><h4>Document Intelligence</h4><p>Automated extraction, classification, and analysis of unstructured documents at scale.</p></div>
+    <div class="uc-item fade-up"><div class="ui-icon">🔮</div><h4>Predictive Analytics</h4><p>Forecast demand, churn, maintenance needs, and more with high-accuracy ML models.</p></div>
+    <div class="uc-item fade-up"><div class="ui-icon">🎯</div><h4>Recommendation Engines</h4><p>Personalised content and product recommendations that increase engagement and revenue.</p></div>
+    <div class="uc-item fade-up"><div class="ui-icon">🛡️</div><h4>Fraud Detection</h4><p>Real-time anomaly detection models that flag suspicious behaviour before damage occurs.</p></div>
+    <div class="uc-item fade-up"><div class="ui-icon">👁️</div><h4>Computer Vision</h4><p>Image recognition, object detection, and visual quality control for manufacturing and retail.</p></div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h2>Not sure where to start with AI? That's exactly where we come in.</h2>
+  <a href="index.html#contact" class="btn-dark">Book a Free Strategy Session →</a>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">IT<span>.</span> Intello Technologies</a>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="software.html">Software Dev</a></li>
+    <li><a href="outsourcing.html">Outsourcing</a></li>
+    <li><a href="cybersecurity.html">Security</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Intello Technologies</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries=>entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}}),{threshold:.1});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

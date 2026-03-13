@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cybersecurity – Intello Technologies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#0a0a0f;--paper:#f5f4f0;--accent:#00e5a0;--accent2:#0057ff;--mid:#6b6b78;--border:rgba(10,10,15,0.1);--card-bg:#ffffff;--red:#ff4040;--redsoft:#ff6b6b}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5%;background:rgba(245,244,240,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none}
+    .nav-logo span{color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{font-size:.875rem;font-weight:500;color:var(--mid);text-decoration:none;transition:color.2s}
+    .nav-links a:hover{color:var(--ink)}
+    .nav-cta{background:var(--ink);color:var(--paper)!important;padding:.5rem 1.2rem;border-radius:100px;font-weight:500!important;transition:background.2s!important}
+    .nav-cta:hover{background:var(--accent2)!important}
+
+    .page-hero{min-height:75vh;display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 5% 5rem;background:linear-gradient(155deg,#0f0000 0%,#1a0505 50%,#0a0a0f 100%);position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,64,64,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,64,64,.04) 1px,transparent 1px);background-size:50px 50px}
+    .blob-hero{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,64,64,.18) 0%,transparent 70%);top:-150px;right:-100px;pointer-events:none}
+    .blob-hero2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,87,255,.12) 0%,transparent 70%);bottom:-100px;left:10%;pointer-events:none}
+    .page-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,64,64,.1);border:1px solid rgba(255,64,64,.25);color:var(--redsoft);padding:.4rem 1rem;border-radius:100px;font-size:.8rem;font-weight:500;letter-spacing:.04em;margin-bottom:1.5rem;width:fit-content}
+    .page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.05;max-width:16ch}
+    .page-hero p{margin-top:1.5rem;color:rgba(255,255,255,.5);font-size:1.1rem;max-width:55ch;line-height:1.7;font-weight:300}
+    .hero-btns{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-red{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;padding:.85rem 1.8rem;border-radius:100px;font-size:.9rem;font-weight:600;text-decoration:none;transition:background.2s,transform.15s}
+    .btn-red:hover{background:#cc0000;transform:translateY(-2px)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);padding:.85rem 1.8rem;border-radius:100px;font-size:.9rem;font-weight:400;text-decoration:none;transition:.2s}
+    .btn-ghost:hover{border-color:var(--redsoft);color:var(--redsoft)}
+
+    section{padding:6rem 5%}
+    .section-label{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+    .section-label::before{content:'';display:block;width:20px;height:2px;background:var(--accent2)}
+    h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+    .sub{margin-top:.75rem;color:var(--mid);font-size:1rem;line-height:1.7;font-weight:300;max-width:55ch}
+
+    .sec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3.5rem}
+    .sec-card{padding:2rem;background:var(--card-bg);border:1px solid var(--border);border-radius:16px;transition:transform.2s,box-shadow.2s;position:relative;overflow:hidden}
+    .sec-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background.2s}
+    .sec-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.07)}
+    .sec-card:hover::after{background:var(--red)}
+    .sc-icon{font-size:2rem;margin-bottom:1rem}
+    .sec-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+    .sec-card p{font-size:.85rem;color:var(--mid);line-height:1.6;font-weight:300}
+
+    .threat-section{background:#0a0a0f;color:#fff}
+    .threat-section .section-label{color:var(--redsoft)}
+    .threat-section .section-label::before{background:var(--redsoft)}
+    .threat-section h2{color:#fff}
+    .threat-section .sub{color:rgba(255,255,255,.45)}
+    .threat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);margin-top:3rem}
+    .threat-item{padding:1.8rem;background:#0a0a0f;display:flex;flex-direction:column;gap:.5rem;transition:background.2s}
+    .threat-item:hover{background:#111}
+    .ti-icon{font-size:1.5rem}
+    .threat-item h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700}
+    .threat-item p{font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.5;font-weight:300}
+
+    .compliance-section{background:#f0efe9}
+    .comp-grid{display:flex;flex-wrap:wrap;gap:1rem;margin-top:3rem}
+    .comp-badge{display:inline-flex;align-items:center;gap:.75rem;padding:.9rem 1.4rem;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;transition:transform.15s,box-shadow.15s}
+    .comp-badge:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+    .comp-badge .cb-icon{font-size:1.4rem}
+    .comp-badge h4{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700}
+    .comp-badge p{font-size:.75rem;color:var(--mid);font-weight:300}
+
+    .cta-strip{background:linear-gradient(135deg,#1a0000,#3d0000);padding:5rem 5%;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;border-top:1px solid rgba(255,64,64,.15)}
+    .cta-strip h2{color:#fff;font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;max-width:32ch}
+    .cta-strip p{color:rgba(255,255,255,.45);font-size:.9rem;margin-top:.5rem;font-weight:300}
+    .btn-red-outline{display:inline-flex;align-items:center;gap:.5rem;border:1.5px solid var(--red);color:var(--red);padding:.9rem 2rem;border-radius:100px;font-size:.95rem;font-weight:600;text-decoration:none;transition:.2s;white-space:nowrap}
+    .btn-red-outline:hover{background:var(--red);color:#fff;transform:translateY(-2px)}
+
+    footer{background:#050508;color:rgba(245,244,240,.4);padding:3rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(255,255,255,.04)}
+    .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:rgba(245,244,240,.7);text-decoration:none}
+    .footer-logo span{color:var(--accent)}
+    .footer-links{display:flex;gap:2rem;list-style:none}
+    .footer-links a{font-size:.82rem;color:rgba(245,244,240,.4);text-decoration:none;transition:color.2s}
+    .footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:.8rem}
+
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity.6s,transform.6s}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:900px){.nav-links{display:none}.cta-strip{flex-direction:column}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">IT<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="software.html">Software</a></li>
+    <li><a href="ai.html">AI Consulting</a></li>
+    <li><a href="outsourcing.html">Outsourcing</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="blob-hero"></div>
+  <div class="blob-hero2"></div>
+  <div class="page-badge">🔐 Cybersecurity</div>
+  <h1>Secure by design. Not by accident.</h1>
+  <p>We embed security at every layer of your technology — from architecture decisions to deployment pipelines — so threats are stopped before they start.</p>
+  <div class="hero-btns">
+    <a href="index.html#contact" class="btn-red">Get a Security Assessment →</a>
+    <a href="index.html#process" class="btn-ghost">Our Methodology</a>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">Our Services</div>
+  <h2 class="fade-up">Comprehensive security across every surface.</h2>
+  <p class="sub fade-up">From penetration testing to cloud hardening, we protect what matters most — your data, your systems, and your reputation.</p>
+
+  <div class="sec-grid">
+    <div class="sec-card fade-up">
+      <div class="sc-icon">🔍</div>
+      <h3>Penetration Testing</h3>
+      <p>Simulated attacks on your applications, APIs, and infrastructure to expose real vulnerabilities before malicious actors do — with full remediation guidance.</p>
+    </div>
+    <div class="sec-card fade-up">
+      <div class="sc-icon">🏗️</div>
+      <h3>Security Architecture Review</h3>
+      <p>Expert review of your system design, authentication flows, data handling, and network topology — ensuring security is built into the foundation, not added as an afterthought.</p>
+    </div>
+    <div class="sec-card fade-up">
+      <div class="sc-icon">☁️</div>
+      <h3>Cloud Security & Hardening</h3>
+      <p>IAM policy audits, misconfiguration scanning, and security baseline enforcement across AWS, GCP, and Azure environments — reducing your attack surface significantly.</p>
+    </div>
+    <div class="sec-card fade-up">
+      <div class="sc-icon">📋</div>
+      <h3>Risk & Compliance Assessments</h3>
+      <p>Gap analysis against GDPR, ISO 27001, SOC 2, PCI-DSS, and HIPAA — with a practical remediation roadmap to achieve and maintain compliance.</p>
+    </div>
+    <div class="sec-card fade-up">
+      <div class="sc-icon">👁️</div>
+      <h3>Security Monitoring & SIEM</h3>
+      <p>24/7 threat detection, log aggregation, and alerting pipelines built on industry-leading SIEM platforms. Detect, investigate, and respond in real time.</p>
+    </div>
+    <div class="sec-card fade-up">
+      <div class="sc-icon">🎓</div>
+      <h3>Security Training & Awareness</h3>
+      <p>Tailored training programmes for developers, ops teams, and executives — turning your people from your biggest vulnerability into your strongest defence.</p>
+    </div>
+  </div>
+</section>
+
+<section class="threat-section">
+  <div class="section-label">Threat Coverage</div>
+  <h2 class="fade-up">What we protect you against.</h2>
+  <p class="sub fade-up">Modern threat landscapes are complex. We cover the full spectrum of attack vectors that target modern organisations.</p>
+
+  <div class="threat-grid">
+    <div class="threat-item fade-up"><div class="ti-icon">💉</div><h4>SQL Injection</h4><p>Database attacks via malicious input</p></div>
+    <div class="threat-item fade-up"><div class="ti-icon">🎣</div><h4>Phishing & Social Eng.</h4><p>Credential theft via human manipulation</p></div>
+    <div class="threat-item fade-up"><div class="ti-icon">🔒</div><h4>Ransomware</h4><p>Data encryption and extortion attacks</p></div>
+    <div class="threat-item fade-up"><div class="ti-icon">🌊</div><h4>DDoS Attacks</h4><p>Service disruption via traffic floods</p></div>
+    <div class="threat-item fade-up"><div class="ti-icon">🔑</div><h4>Broken Auth</h4><p>Session hijacking and credential attacks</p></div>
+    <div class="threat-item fade-up"><div class="ti-icon">📦</div><h4>Supply Chain</h4><p>Compromised dependencies and third parties</p></div>
+    <div class="threat-item fade-up"><div class="ti-icon">🕵️</div><h4>Insider Threats</h4><p>Malicious or negligent internal actors</p></div>
+    <div class="threat-item fade-up"><div class="ti-icon">⚙️</div><h4>Zero-Day Exploits</h4><p>Unknown vulnerabilities in production systems</p></div>
+  </div>
+</section>
+
+<section class="compliance-section">
+  <div class="section-label">Compliance Frameworks</div>
+  <h2 class="fade-up">We help you meet — and exceed — industry standards.</h2>
+  <p class="sub fade-up">Regulatory compliance is the floor, not the ceiling. We help you achieve certifications and build a genuine security culture.</p>
+
+  <div class="comp-grid">
+    <div class="comp-badge fade-up"><div class="cb-icon">🇪🇺</div><div><h4>GDPR</h4><p>Data protection regulation</p></div></div>
+    <div class="comp-badge fade-up"><div class="cb-icon">🏥</div><div><h4>HIPAA</h4><p>Healthcare data compliance</p></div></div>
+    <div class="comp-badge fade-up"><div class="cb-icon">💳</div><div><h4>PCI-DSS</h4><p>Payment card security</p></div></div>
+    <div class="comp-badge fade-up"><div class="cb-icon">🔐</div><div><h4>ISO 27001</h4><p>Information security management</p></div></div>
+    <div class="comp-badge fade-up"><div class="cb-icon">📊</div><div><h4>SOC 2</h4><p>Service organisation controls</p></div></div>
+    <div class="comp-badge fade-up"><div class="cb-icon">🏛️</div><div><h4>NIST CSF</h4><p>Cybersecurity framework</p></div></div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <div>
+    <h2>Don't wait for a breach. Get ahead of it today.</h2>
+    <p>A single security assessment can save you millions — and your reputation.</p>
+  </div>
+  <a href="index.html#contact" class="btn-red-outline">Request an Assessment →</a>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">IT<span>.</span> Intello Technologies</a>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="software.html">Software Dev</a></li>
+    <li><a href="ai.html">AI Consulting</a></li>
+    <li><a href="outsourcing.html">Outsourcing</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Intello Technologies</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries=>entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}}),{threshold:.1});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Software Development – Intello Technologies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#0a0a0f; --paper:#f5f4f0; --accent:#00e5a0; --accent2:#0057ff; --mid:#6b6b78; --border:rgba(10,10,15,0.1); --card-bg:#ffffff; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5%;background:rgba(245,244,240,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+    .nav-logo span{color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{font-size:.875rem;font-weight:500;color:var(--mid);text-decoration:none;transition:color.2s}
+    .nav-links a:hover{color:var(--ink)}
+    .nav-cta{background:var(--ink);color:var(--paper)!important;padding:.5rem 1.2rem;border-radius:100px;font-weight:500!important;transition:background.2s!important}
+    .nav-cta:hover{background:var(--accent2)!important}
+
+    .page-hero{min-height:70vh;display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 5% 5rem;background:linear-gradient(160deg,#0a0a0f 0%,#0d1a3a 100%);position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:50px 50px}
+    .blob-hero{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,87,255,.25) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+    .page-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,87,255,.15);border:1px solid rgba(0,87,255,.3);color:#6699ff;padding:.4rem 1rem;border-radius:100px;font-size:.8rem;font-weight:500;letter-spacing:.04em;margin-bottom:1.5rem;width:fit-content}
+    .page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.05;max-width:16ch}
+    .page-hero p{margin-top:1.5rem;color:rgba(255,255,255,.55);font-size:1.1rem;max-width:55ch;line-height:1.7;font-weight:300}
+    .hero-btns{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-accent{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent2);color:#fff;padding:.85rem 1.8rem;border-radius:100px;font-size:.9rem;font-weight:500;text-decoration:none;transition:background.2s,transform.15s}
+    .btn-accent:hover{background:#0040cc;transform:translateY(-2px)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);padding:.85rem 1.8rem;border-radius:100px;font-size:.9rem;font-weight:400;text-decoration:none;transition:.2s}
+    .btn-ghost:hover{border-color:#fff;color:#fff}
+
+    section{padding:6rem 5%}
+    .section-label{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+    .section-label::before{content:'';display:block;width:20px;height:2px;background:var(--accent2)}
+    h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+    .sub{margin-top:.75rem;color:var(--mid);font-size:1rem;line-height:1.7;font-weight:300;max-width:55ch}
+
+    .tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3.5rem}
+    .tech-card{padding:2rem;background:var(--card-bg);border:1px solid var(--border);border-radius:16px;transition:transform.2s,box-shadow.2s}
+    .tech-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.07)}
+    .tc-icon{font-size:2rem;margin-bottom:1rem}
+    .tech-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+    .tech-card p{font-size:.85rem;color:var(--mid);line-height:1.6;font-weight:300}
+
+    .stack-section{background:#0a0a0f;color:#fff}
+    .stack-section .section-label{color:var(--accent)}
+    .stack-section .section-label::before{background:var(--accent)}
+    .stack-section h2{color:#fff}
+    .stack-section .sub{color:rgba(255,255,255,.45)}
+    .stack-pills{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.5rem}
+    .pill{padding:.5rem 1.1rem;border-radius:100px;border:1px solid rgba(255,255,255,.1);font-size:.82rem;color:rgba(255,255,255,.7);font-weight:400;transition:border-color.2s,color.2s}
+    .pill:hover{border-color:var(--accent);color:var(--accent)}
+    .pill.accent{background:rgba(0,87,255,.15);border-color:rgba(0,87,255,.35);color:#80aaff}
+
+    .cta-strip{background:linear-gradient(135deg,var(--accent2),#00b4ff);padding:5rem 5%;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+    .cta-strip h2{color:#fff;font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;max-width:30ch}
+    .btn-white{display:inline-flex;align-items:center;gap:.5rem;background:#fff;color:var(--accent2);padding:.9rem 2rem;border-radius:100px;font-size:.95rem;font-weight:600;text-decoration:none;transition:transform.15s,box-shadow.2s;white-space:nowrap}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.15)}
+
+    footer{background:#050508;color:rgba(245,244,240,.4);padding:3rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(255,255,255,.04)}
+    .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:rgba(245,244,240,.7);text-decoration:none}
+    .footer-logo span{color:var(--accent)}
+    .footer-links{display:flex;gap:2rem;list-style:none}
+    .footer-links a{font-size:.82rem;color:rgba(245,244,240,.4);text-decoration:none;transition:color.2s}
+    .footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:.8rem}
+
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity.6s,transform.6s}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:900px){.nav-links{display:none}.cta-strip{flex-direction:column}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">IT<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="ai.html">AI Consulting</a></li>
+    <li><a href="outsourcing.html">Outsourcing</a></li>
+    <li><a href="cybersecurity.html">Security</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="blob-hero"></div>
+  <div class="page-badge">💻 Software Development</div>
+  <h1>Code that scales. Systems that endure.</h1>
+  <p>From rapid MVPs to enterprise-grade platforms, we design and engineer software that's fast, reliable, and built to grow with your business.</p>
+  <div class="hero-btns">
+    <a href="index.html#contact" class="btn-accent">Start Your Project →</a>
+    <a href="index.html#process" class="btn-ghost">How We Work</a>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">Our Capabilities</div>
+  <h2 class="fade-up">Everything you need to ship great software.</h2>
+  <p class="sub fade-up">We cover the full development lifecycle — from product ideation and architecture to deployment and ongoing maintenance.</p>
+
+  <div class="tech-grid">
+    <div class="tech-card fade-up">
+      <div class="tc-icon">🌐</div>
+      <h3>Web Applications</h3>
+      <p>Performant, accessible, and beautifully crafted web apps built with modern frameworks like React, Next.js, Vue, and SvelteKit.</p>
+    </div>
+    <div class="tech-card fade-up">
+      <div class="tc-icon">📱</div>
+      <h3>Mobile Development</h3>
+      <p>Cross-platform and native iOS/Android applications using React Native and Flutter — one codebase, native performance.</p>
+    </div>
+    <div class="tech-card fade-up">
+      <div class="tc-icon">🏢</div>
+      <h3>Enterprise Systems</h3>
+      <p>Large-scale ERP, CRM, and internal tooling for complex organisations — robust architecture with zero compromise on reliability.</p>
+    </div>
+    <div class="tech-card fade-up">
+      <div class="tc-icon">⚙️</div>
+      <h3>API & Backend Engineering</h3>
+      <p>RESTful and GraphQL APIs, microservices architecture, event-driven systems, and high-throughput data pipelines.</p>
+    </div>
+    <div class="tech-card fade-up">
+      <div class="tc-icon">☁️</div>
+      <h3>Cloud-Native Development</h3>
+      <p>Serverless functions, containerised workloads on Kubernetes, and infrastructure-as-code across AWS, GCP, and Azure.</p>
+    </div>
+    <div class="tech-card fade-up">
+      <div class="tc-icon">🚀</div>
+      <h3>MVP & Product Launch</h3>
+      <p>From validated idea to live product in weeks. We move fast without cutting corners — your competitive edge, delivered early.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stack-section">
+  <div class="section-label">Tech Stack</div>
+  <h2 class="fade-up">Built with the best tools in the ecosystem.</h2>
+  <p class="sub fade-up">We don't chase trends. We use battle-tested technologies — and we choose the right tool for each job.</p>
+
+  <div class="stack-pills">
+    <span class="pill accent">React</span>
+    <span class="pill accent">Next.js</span>
+    <span class="pill accent">TypeScript</span>
+    <span class="pill">Node.js</span>
+    <span class="pill">Python</span>
+    <span class="pill">Go</span>
+    <span class="pill">PostgreSQL</span>
+    <span class="pill">MongoDB</span>
+    <span class="pill">Redis</span>
+    <span class="pill">Kubernetes</span>
+    <span class="pill">Docker</span>
+    <span class="pill">AWS</span>
+    <span class="pill">GCP</span>
+    <span class="pill">Terraform</span>
+    <span class="pill">React Native</span>
+    <span class="pill">Flutter</span>
+    <span class="pill">GraphQL</span>
+    <span class="pill">Kafka</span>
+    <span class="pill">ElasticSearch</span>
+    <span class="pill">CI/CD</span>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h2>Ready to start building? Let's talk about your project.</h2>
+  <a href="index.html#contact" class="btn-white">Get a Free Estimate →</a>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">IT<span>.</span> Intello Technologies</a>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="ai.html">AI Consulting</a></li>
+    <li><a href="outsourcing.html">Outsourcing</a></li>
+    <li><a href="cybersecurity.html">Security</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Intello Technologies</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*80); obs.unobserve(e.target); } }), {threshold:.1});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
